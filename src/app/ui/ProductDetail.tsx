@@ -18,7 +18,6 @@ interface Product {
   originalPrice?: number;
   image?: string;
   description?: string;
-  alt?: string;
 }
 
 export default function ProductDetail({ product, source }: { product: Product | null; source: string }) {
@@ -42,13 +41,13 @@ export default function ProductDetail({ product, source }: { product: Product | 
       <div className="flex flex-col items-center">
         <div className="aspect-4/3 w-full bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center mb-4 relative">
           {product.image ? (
-            <Image src={product.image} alt={product.alt ?? 'Product image'} className="object-cover w-full h-full" />
+            <Image width="400" height="400" src={product.image} alt={product.alt} className="object-cover w-full h-full" />
           ) : (
             <span className="text-gray-400">No Image</span>
           )}
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
             {gallery.filter((img): img is string => !!img).map((img, i) => (
-              <Image key={i} src={img} alt="thumb" className="w-12 h-12 rounded-md border-2 border-white object-cover shadow cursor-pointer" />
+              <Image width="12" height="12" key={i} src={img} alt="thumb" className="w-12 h-12 rounded-md border-2 border-white object-cover shadow cursor-pointer" />
             ))}
             <span className="w-12 h-12 flex items-center justify-center rounded-md bg-gray-200 text-gray-500 font-semibold text-xs">+7</span>
           </div>
@@ -92,7 +91,7 @@ export default function ProductDetail({ product, source }: { product: Product | 
             {recommendations.map((rec, i) => (
               <Card key={i} className="p-2">
                 <div className="aspect-4/3 bg-gray-100 rounded-lg overflow-hidden mb-2 flex items-center justify-center">
-                  <Image src={rec.image} alt={rec.name} className="object-cover w-full h-full" />
+                  <Image width="400" height="400" src={rec.image} alt={rec.name} className="object-cover w-full h-full" />
                 </div>
                 <div className="font-semibold text-sm mb-1">{rec.name}</div>
                 <div className="text-blue-600 font-bold text-base">£{rec.price.toFixed(2)}</div>

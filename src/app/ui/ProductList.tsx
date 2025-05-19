@@ -18,6 +18,7 @@ interface ProductListProps {
   title: string;
   data: Array<{
     id: string;
+    sku?: string;
     name: string;
     price?: number;
     originalPrice?: number;
@@ -90,7 +91,15 @@ export default function ProductList({ data, source }: ProductListProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {data.map((p) => {
             const img = p.image;
-            const detailHref = `/${getSource()}/products/${p.id}`;
+            // For Shopify, extract the numeric ID from gid://shopify/Product/20
+            const getShopifyId = (id: string) => {
+              const match = id.match(/Product\/(\d+)/);
+              return match ? match[1] : id;
+            };
+            const detailHref =
+              getSource() === "shopify"
+                ? `/products/shopify/${getShopifyId(p.id)}`
+                : `/products/${getSource()}/${p.sku || p.id}`;
             return (
               <Link href={detailHref} key={p.id} className="group">
                 <Card className="flex flex-col h-full transition-all shadow hover:shadow-xl hover:scale-[1.025] bg-white border-0 group-hover:ring-2 group-hover:ring-blue-500">

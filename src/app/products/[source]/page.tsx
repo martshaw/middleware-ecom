@@ -2,8 +2,9 @@ import ProductList from '../../ui/ProductList';
 
 interface Params { source?: string }
 
-export default async function ProductsBySourcePage({ params }: { params: Params }) {
-  const { source } = params;
+export default async function ProductsBySourcePage({ params }: { params: Params | Promise<Params> }) {
+  const awaitedParams = await params;
+  const { source } = awaitedParams;
   const endpoint = source ? `/api/${source}` : '/api/products';
   const res = await fetch(`http://localhost:3000${endpoint}`, { cache: 'no-store' });
   const data = await res.json();
