@@ -1,0 +1,385 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/20",
+      "title": "NORREGAARD CONTRAST - Basic T-shirt - cub melange",
+      "handle": "norregaard-contrast-basic-tshirt-cub-melange",
+      "description": "Classic cub melange t-shirt with contrast details.",
+      "vendor": "Les Deux",
+      "priceRange": {
+        "minVariantPrice": { "amount": "34.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "34.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/43ee848b61e04f61873160c235f7f217/caf77f4d39fb41bd879f1abf4f0026de.jpg?imwidth=300", "altText": "Les Deux NORREGAARD CONTRAST - Basic T-shirt - cub melange" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/21",
+      "title": "RELAXED BLOCKED MCLAREN - Sweatshirt - orange",
+      "handle": "relaxed-blocked-mclaren-sweatshirt-orange",
+      "description": "Relaxed fit orange sweatshirt with McLaren branding.",
+      "vendor": "Hollister Co.",
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "49.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/46fc9682ea2c4e1b9c7eca7025aeb726/3fccbd3d29e047498eedb3eebe455f90.jpg?imwidth=300", "altText": "Hollister Co. RELAXED BLOCKED MCLAREN - Sweatshirt - orange" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/22",
+      "title": "9060 UNISEX - Trainers - sea salt",
+      "handle": "9060-unisex-trainers-sea-salt",
+      "description": "Chunky sea salt trainers for all-day comfort.",
+      "vendor": "New Balance",
+      "priceRange": {
+        "minVariantPrice": { "amount": "159.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "159.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/dc2036bb0fb54fb0bf96f8d296d220eb/baacd89de39b4d4797f7ac141d27fbc9.jpg?imwidth=300&filter=packshot", "altText": "New Balance 9060 UNISEX - Trainers - sea salt" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/3", "title": "Collection C" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/23",
+      "title": "SNOOPY SUN TEE - Print T-shirt - dove",
+      "handle": "snoopy-sun-tee-print-tshirt-dove",
+      "description": "Soft dove-colored tee with Snoopy sun print.",
+      "vendor": "Redefined Rebel",
+      "priceRange": {
+        "minVariantPrice": { "amount": "24.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "24.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/42da7ab03d1a414ab118fa321c2df076/71b89d6d563740298c5def734a91af93.jpg?imwidth=300", "altText": "Redefined Rebel SNOOPY SUN TEE - Print T-shirt - dove" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/24",
+      "title": "XA PRO 3D AMPHIB UNISEX - Trainers - aloe/martini olive/black",
+      "handle": "xa-pro-3d-amphib-unisex-trainers-aloe-martini-olive-black",
+      "description": "Versatile trainers for outdoor adventures.",
+      "vendor": "Salomon Sportstyle",
+      "priceRange": {
+        "minVariantPrice": { "amount": "109.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "109.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/9bd19a296dad434d98f3d7aa3684fa7f/3042f1d8c66945bbb55187dcada41e0e.jpg?imwidth=300", "altText": "Salomon Sportstyle XA PRO 3D AMPHIB UNISEX - Trainers - aloe/martini olive/black" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/25",
+      "title": "KEVIN DURANT SHORT - Sports shorts - black",
+      "handle": "kevin-durant-short-sports-shorts-black",
+      "description": "Black sports shorts with Kevin Durant branding.",
+      "vendor": "Nike Performance",
+      "priceRange": {
+        "minVariantPrice": { "amount": "47.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "47.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/a120ec18c9004800b428788671535ef9/dfda7f627bf94a9fbbe7dadad8c9c9cf.jpg?imwidth=300", "altText": "Nike Performance KEVIN DURANT SHORT - Sports shorts - black" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/3", "title": "Collection C" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/26",
+      "title": "CLUB - Tracksuit bottoms - magic ember magic ember white",
+      "handle": "club-tracksuit-bottoms-magic-ember-magic-ember-white",
+      "description": "Comfy tracksuit bottoms in magic ember color.",
+      "vendor": "Nike Sportswear",
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "39.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/992c545c2bf2485a8de687eec3e7288f/056e4e064a954ee68a3c3a1d1c821769.jpg?imwidth=300", "altText": "Nike Sportswear CLUB - Tracksuit bottoms - magic ember magic ember white" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/27",
+      "title": "Slip-ons - beige",
+      "handle": "slip-ons-beige",
+      "description": "Beige slip-ons for easy, casual style.",
+      "vendor": "Pier One",
+      "priceRange": {
+        "minVariantPrice": { "amount": "30.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "30.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/6babc774d1d240bf8693fe506cd1dcfc/4d857518102945e986263d535e5c17e7.jpg?imwidth=300", "altText": "Pier One Slip-ons - beige" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/28",
+      "title": "PREMIUM - Shorts - charcoal",
+      "handle": "premium-shorts-charcoal",
+      "description": "Charcoal shorts with premium finish.",
+      "vendor": "CLOSURE London",
+      "priceRange": {
+        "minVariantPrice": { "amount": "79.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "79.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/7b8c87e0c19c488f952bbc4596730ea2/e17bae79ba1a4e94b64f212f47a73ada.png?imwidth=300", "altText": "CLOSURE London PREMIUM - Shorts - charcoal" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/3", "title": "Collection C" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/29",
+      "title": "ENHANCE ACLIFE WIND JACKET - Waterproof jacket - phantom",
+      "handle": "enhance-aclife-wind-jacket-waterproof-jacket-phantom",
+      "description": "Phantom wind jacket, waterproof and lightweight.",
+      "vendor": "Oakley",
+      "priceRange": {
+        "minVariantPrice": { "amount": "79.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "79.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/d9a5aa7ac3ff407b80f3cfb39ecb91cd/4a8a878f5f7a4c0fa68e54e4e94f916b.jpg?imwidth=300", "altText": "Oakley ENHANCE ACLIFE WIND JACKET - Waterproof jacket - phantom" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/30",
+      "title": "AIR FORCE 1 07 - Trainers - cave stone/hyper royal/sail",
+      "handle": "air-force-1-07-trainers-cave-stone-hyper-royal-sail",
+      "description": "Classic Air Force 1 trainers in cave stone color.",
+      "vendor": "Nike Sportswear",
+      "priceRange": {
+        "minVariantPrice": { "amount": "114.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "114.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/89b36a5de37241ee85a5f79b36998484/ce12d774440e4832aed4a4c58be2e156.jpg?imwidth=300", "altText": "Nike Sportswear AIR FORCE 1 07 - Trainers - cave stone/hyper royal/sail" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/31",
+      "title": "HOODED PARKA JACKET - green",
+      "handle": "hooded-parka-jacket-green",
+      "description": "Warm green parka with faux fur hood.",
+      "vendor": "BrandX",
+      "priceRange": {
+        "minVariantPrice": { "amount": "119.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "119.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/36ac6accacb44c269af01390cccafcce/f25e58f6732042caad52871bdb135839.jpg?imwidth=300", "altText": "BrandX HOODED PARKA JACKET - green" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/3", "title": "Collection C" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/32",
+      "title": "CANVAS SNEAKERS - white",
+      "handle": "canvas-sneakers-white",
+      "description": "White canvas sneakers for casual wear.",
+      "vendor": "BrandY",
+      "priceRange": {
+        "minVariantPrice": { "amount": "34.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "34.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/0e905d0623154e0dae1fcd0b464714cb/92a5c989e2584e7da2dd5b7b15633193.jpg?imwidth=300", "altText": "BrandY CANVAS SNEAKERS - white" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/33",
+      "title": "WOOL BEANIE - black",
+      "handle": "wool-beanie-black",
+      "description": "Soft black beanie for winter warmth.",
+      "vendor": "BrandZ",
+      "priceRange": {
+        "minVariantPrice": { "amount": "19.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "19.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/54ad247f1a84409383af489aae246eb9/30e96f5795d544e48d3ce29c5c42abcb.jpg?imwidth=300", "altText": "BrandZ WOOL BEANIE - black" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/34",
+      "title": "OXFORD SHIRT - white",
+      "handle": "oxford-shirt-white",
+      "description": "Crisp white shirt for formal occasions.",
+      "vendor": "BrandA",
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "39.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/4b9a398ae00747098be5c7ff365c9ac0/45e8b651bd8d4f93b8f8ea9482048d54.jpg?imwidth=300", "altText": "BrandA OXFORD SHIRT - white" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/3", "title": "Collection C" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/35",
+      "title": "SMART WATCH - touchscreen",
+      "handle": "smart-watch-touchscreen",
+      "description": "Fitness tracker with touchscreen display.",
+      "vendor": "BrandB",
+      "priceRange": {
+        "minVariantPrice": { "amount": "129.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "129.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/54ad247f1a84409383af489aae246eb9/30e96f5795d544e48d3ce29c5c42abcb.jpg?imwidth=300", "altText": "BrandB SMART WATCH - touchscreen" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/36",
+      "title": "PUFFER JACKET - black",
+      "handle": "puffer-jacket-black",
+      "description": "Lightweight black puffer for cold days.",
+      "vendor": "BrandC",
+      "priceRange": {
+        "minVariantPrice": { "amount": "79.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "79.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/36ac6accacb44c269af01390cccafcce/f25e58f6732042caad52871bdb135839.jpg?imwidth=300", "altText": "BrandC PUFFER JACKET - black" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/37",
+      "title": "LEATHER LOAFERS - brown",
+      "handle": "leather-loafers-brown",
+      "description": "Brown loafers for smart-casual style.",
+      "vendor": "BrandD",
+      "priceRange": {
+        "minVariantPrice": { "amount": "79.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "79.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/4b9a398ae00747098be5c7ff365c9ac0/45e8b651bd8d4f93b8f8ea9482048d54.jpg?imwidth=300", "altText": "BrandD LEATHER LOAFERS - brown" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/3", "title": "Collection C" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/38",
+      "title": "BACKPACK - black",
+      "handle": "backpack-black",
+      "description": "Durable black backpack with laptop sleeve.",
+      "vendor": "BrandE",
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "49.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/0e905d0623154e0dae1fcd0b464714cb/92a5c989e2584e7da2dd5b7b15633193.jpg?imwidth=300", "altText": "BrandE BACKPACK - black" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/1", "title": "Collection A" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/39",
+      "title": "GRAPHIC HOODIE - print",
+      "handle": "graphic-hoodie-print",
+      "description": "Bold print hoodie for streetwear vibes.",
+      "vendor": "BrandF",
+      "priceRange": {
+        "minVariantPrice": { "amount": "44.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "44.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+          { "node": { "url": "https://img01.ztat.net/article/spp-media-p1/4b9a398ae00747098be5c7ff365c9ac0/45e8b651bd8d4f93b8f8ea9482048d54.jpg?imwidth=300", "altText": "BrandF GRAPHIC HOODIE - print" } }
+        ]
+      },
+      "availableForSale": true,
+      "collections": { "edges": [ { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } } ] }
+    },
+    {
+      "id": "gid://shopify/Product/40",
+      "title": "CHINO TROUSERS - beige",
+      "handle": "chino-trousers-beige",
+      "description": "Beige chinos for smart-casual outfits.",
+      "vendor": "BrandG",
+      "priceRange": {
+        "minVariantPrice": { "amount": "44.99", "currencyCode": "GBP" },
+        "maxVariantPrice": { "amount": "44.99", "currencyCode": "GBP" }
+      },
+      "images": {
+        "edges": [
+              ]
+            },
+            "availableForSale": true,
+            "collections": {
+              "edges": [
+                { "node": { "id": "gid://shopify/Collection/2", "title": "Collection B" } }
+              ]
+            }
+          }
+      ]
+}
