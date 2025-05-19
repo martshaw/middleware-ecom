@@ -21,10 +21,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <span className="text-2xl font-extrabold tracking-tight text-blue-700">ShopVerse</span>
           </div>
           <div className="flex gap-2 md:gap-4">
-            <Link href="/salesforce/products" className="group">
+            <Link href="/products/salesforce" className="group">
               <Button variant="ghost" className="rounded-full px-5 py-2 text-base font-medium group-hover:bg-blue-50 group-hover:text-blue-700 transition">Salesforce</Button>
             </Link>
-            <Link href="/shopify/products" className="group">
+            <Link href="/products/shopify" className="group">
               <Button variant="ghost" className="rounded-full px-5 py-2 text-base font-medium group-hover:bg-green-50 group-hover:text-green-700 transition">Shopify</Button>
             </Link>
           </div>
