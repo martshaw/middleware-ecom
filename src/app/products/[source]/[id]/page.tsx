@@ -21,7 +21,8 @@ export default async function ProductDetailPage({ params }: { params: Params | P
     const products = data.products || [];
 
     // Extract the actual product objects for lookup
-    const productList = products.map((entry: any) =>
+    type ProductEntry = { data?: { product?: { id: string; [key: string]: unknown } }; id?: string; sku?: string; [key: string]: unknown };
+    const productList = products.map((entry: ProductEntry) =>
       entry.data && entry.data.product ? entry.data.product : entry
     );
     let product;
