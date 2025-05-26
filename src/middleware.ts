@@ -1,77 +1,66 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { normalizeProducts } from './utils/normalizeProducts';
+import { handleRewrite } from './utils/rewriteHandlers';
+
+// For advanced testing, see next/experimental/testing/server in Next.js 15.1+
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  // Only transform product API responses
+
+  // Only transform product API responses for specific endpoints
+  // and avoid infinite loops by checking for a custom header
   if (
-    (pathname.startsWith('/api/products') || pathname.startsWith('/api/shopify') || pathname.startsWith('/api/salesforce')) &&
+    (pathname.startsWith('/api/products') ||
+      pathname.startsWith('/api/shopify') ||
+      pathname.startsWith('/api/salesforce')) &&
     !request.headers.get('x-middleware-processed')
   ) {
+    // Proxy the request to the actual API endpoint, adding a header to prevent re-processing
     const response = await fetch(request.url, {
       headers: { 'x-middleware-processed': '1' }
     });
+
+    // Try to parse the response as JSON
     let data;
     try {
       data = await response.json();
     } catch (error) {
+      // If the response is not JSON (e.g., an error page), log and skip transformation
       console.error('Error parsing JSON:', error);
       return NextResponse.next(); // fallback if not json
     }
-    // Normalize image and alt fields for all products
-    if (Array.isArray(data.products)) {
-      data.products = data.products.map((p: { images?: { edges?: { node?: { url?: string } }[] }, imageGroups?: { images?: { link?: string }[] }[], image?: string, name?: string, title?: string }) => ({
-        ...p,
-        image:
-          (p.images && Array.isArray(p.images.edges) && p.images.edges.length > 0 && p.images.edges[0]?.node?.url)
-            ? p.images.edges[0].node.url
-          : (p.imageGroups && Array.isArray(p.imageGroups) && p.imageGroups.length > 0 && p.imageGroups[0].images && Array.isArray(p.imageGroups[0].images) && p.imageGroups[0].images.length > 0 && p.imageGroups[0].images[0]?.link)
-            ? p.imageGroups[0].images[0].link
-          : p.image || null,
-        alt: p.name || p.title || 'Product image',
-      }));
-    } else if (Array.isArray(data)) {
-      data = data.map((p: { images?: { edges?: { node?: { url?: string } }[] }, imageGroups?: { images?: { link?: string }[] }[], image?: string, name?: string, title?: string }) => ({
-        ...p,
-        image:
-          (p.images && Array.isArray(p.images.edges) && p.images.edges.length > 0 && p.images.edges[0]?.node?.url)
-            ? p.images.edges[0].node.url
-          : (p.imageGroups && Array.isArray(p.imageGroups) && p.imageGroups.length > 0 && p.imageGroups[0].images && Array.isArray(p.imageGroups[0].images) && p.imageGroups[0].images.length > 0 && p.imageGroups[0].images[0]?.link)
-            ? p.imageGroups[0].images[0].link
-          : p.image || null,
-        alt: p.name || p.title || 'Product image',
-      }));
-    }
+
+    // Normalize image and alt fields for all products in the response
+    data = normalizeProducts(data);
+
+    // Create a new JSON response with the normalized data
     const res = NextResponse.json(data);
+    // Mark this response as processed to prevent infinite middleware loops
     res.headers.set('x-middleware-processed', '1');
     return res;
   }
 
-  if (pathname === '/salesforce') {
-    const url = request.nextUrl.clone();
-    url.pathname = '/products';
-    url.searchParams.set('source', 'salesforce');
-    return NextResponse.rewrite(url);
+  // Handle rewrites for friendly URLs (/salesforce, /shopify)
+  const rewriteResponse = handleRewrite(request);
+  if (rewriteResponse) {
+    return rewriteResponse;
   }
 
-  if (pathname === '/shopify') {
-    const url = request.nextUrl.clone();
-    url.pathname = '/products';
-    url.searchParams.set('source', 'shopify');
-    return NextResponse.rewrite(url);
-  }
-
+  // For all other requests, continue as normal
   return NextResponse.next();
 }
 
+// Specify which routes this middleware should run on
 export const config = {
   matcher: [
     '/salesforce',
     '/shopify',
     '/api/products',
-    '/api/products/(.*)',
+    '/api/products/:path*',
     '/api/shopify',
-    '/api/shopify/(.*)',
+    '/api/shopify/:path*',
     '/api/salesforce',
-    '/api/salesforce/(.*)'
+    '/api/salesforce/:path*',
   ],
 };

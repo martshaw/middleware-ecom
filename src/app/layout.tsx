@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <Link href="/">
-              <span className="text-2xl font-extrabold tracking-tight text-blue-700 cursor-pointer">ShopVerse</span>
+              <span className="text-2xl font-extrabold tracking-tight text-blue-700 cursor-pointer">Demo</span>
             </Link>
           </div>
           <div className="flex gap-2 md:gap-4">
