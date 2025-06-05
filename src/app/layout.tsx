@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-
+import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
   title: 'E-commerce Middleware Demo',
   description: 'Event-driven Next.js 15 middleware demo for Salesforce and Shopify',
@@ -33,7 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </div>
       </nav>
       {children}
+      <Analytics/>
       </body>
+      
     </html>
   );
 }
