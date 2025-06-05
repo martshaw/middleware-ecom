@@ -20,6 +20,7 @@ export function ProductList({ source }: ProductListProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   /**
    * Fetches products from the API with timeout and error handling
@@ -27,7 +28,10 @@ export function ProductList({ source }: ProductListProps) {
    */
   const fetchProducts = useCallback(async () => {
     try {
-      setIsLoading(true);
+      // Only show loading state on initial load
+      if (isInitialLoad) {
+        setIsLoading(true);
+      }
       setError(null);
       
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
@@ -65,11 +69,17 @@ export function ProductList({ source }: ProductListProps) {
       }
     } finally {
       setIsLoading(false);
+      setIsInitialLoad(false);
     }
   }, [source]);
 
   // Fetch products on mount and cleanup on unmount
   useEffect(() => {
+    // Reset states when source changes
+    setIsInitialLoad(true);
+    setProducts([]);
+    setError(null);
+    
     fetchProducts();
     
     // Cleanup function to prevent memory leaks
@@ -77,7 +87,7 @@ export function ProductList({ source }: ProductListProps) {
       setProducts([]);
       setError(null);
     };
-  }, [fetchProducts]);
+  }, [source, fetchProducts]);
 
   /**
    * Handles add to cart button click
@@ -141,8 +151,8 @@ export function ProductList({ source }: ProductListProps) {
     </div>
   ), [products, source, handleAddToCart]);
 
-  // Loading state with skeleton UI
-  if (isLoading) {
+  // Show skeleton only during initial load
+  if (isLoading && isInitialLoad) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {[...Array(8)].map((_, index) => (
