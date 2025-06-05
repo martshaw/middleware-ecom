@@ -1,6 +1,7 @@
 import ProductList from '../ui/ProductList';
 
-export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ source?: string }> }) {
+export default async function ProductsPage(props: { searchParams: Promise<{ source?: string }> }) {
+  const searchParams = await props.searchParams;
   // Next.js 15: searchParams may be a promise, must await
   const params = typeof searchParams.then === 'function' ? await searchParams : searchParams;
   const source = (params as { source?: string }).source || undefined;
