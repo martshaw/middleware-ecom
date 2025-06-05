@@ -8,8 +8,11 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   let data = [];
   let title = 'All Products';
   try {
+    // Using force-cache to leverage the benefits of ISR
+    // The cache will be invalidated based on the revalidate setting above
     const url = source ? `${apiUrl}/api/${source}` : `${apiUrl}/api/products`;
     const res = await fetch(url, { 
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',

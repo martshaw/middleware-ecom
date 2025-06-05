@@ -22,7 +22,9 @@ export async function middleware(request: NextRequest) {
     }
     
     const response = NextResponse.json({ product });
+    // Set cache headers for ISR
     response.headers.set('x-middleware-processed', '1');
+    response.headers.set('Cache-Control', 's-maxage=60, stale-while-revalidate');
     return response;
   }
 
