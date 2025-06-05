@@ -2,15 +2,16 @@ import ProductList from '../../ui/ProductList';
 
 interface Params { source?: string }
 
-export default async function ProductsBySourcePage({ 
-  params 
-}: { 
-  params: Params | Promise<Params> 
-}) {
+export default async function ProductsBySourcePage(
+  props: { 
+    params: Promise<Params | Promise<Params>> 
+  }
+) {
+  const params = await props.params;
   const resolvedParams = params instanceof Promise ? await params : params;
   const { source } = resolvedParams;
   const endpoint = source ? `/api/${source}` : '/api/products';
-  
+
   try {
     const res = await fetch(`http://localhost:3000${endpoint}`, { 
       cache: 'no-store',

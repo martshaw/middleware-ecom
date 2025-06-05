@@ -55,7 +55,7 @@ export function normalizeProducts(data: unknown): unknown {
     }
 
     // Unify image
-    let image =
+    const image =
       (p.images && Array.isArray(p.images.edges) && p.images.edges.length > 0 && p.images.edges[0]?.node?.url)
         ? p.images.edges[0].node.url
       : (p.imageGroups && Array.isArray(p.imageGroups) && p.imageGroups.length > 0 && p.imageGroups[0].images && Array.isArray(p.imageGroups[0].images) && p.imageGroups[0].images.length > 0 && p.imageGroups[0].images[0]?.link)
@@ -63,13 +63,22 @@ export function normalizeProducts(data: unknown): unknown {
       : typeof p.image === 'string' ? p.image : undefined;
 
     // Unify alt
-    let alt =
+    const alt =
       (p.images && Array.isArray(p.images.edges) && p.images.edges.length > 0 && p.images.edges[0]?.node?.altText)
         ? p.images.edges[0].node.altText
       : p.name || p.title || 'Product image';
 
+    // Normalize Shopify GID format (gid://shopify/Product/20) to just the numeric ID
+    let normalizedId = String(p.id ?? '');
+    if (source === 'shopify' && normalizedId.startsWith('gid://')) {
+      const match = normalizedId.match(/\/(\d+)$/);
+      if (match) {
+        normalizedId = match[1];
+      }
+    }
+
     return {
-      id: String(p.id ?? ''),
+      id: normalizedId,
       sku: p.sku ?? (source === 'shopify' ? p.handle : undefined),
       name: p.name ?? p.title ?? '',
       price,

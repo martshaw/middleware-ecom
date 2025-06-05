@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'E-commerce Middleware Demo',
-  description: 'Event-driven Next.js 15 middleware demo for Salesforce, Shopify, and BigCommerce',
+  description: 'Event-driven Next.js 15 middleware demo for Salesforce and Shopify',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -28,9 +28,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </Link>
             <Link href="/products/shopify" className="group" prefetch={false} aria-label="Browse Shopify Products">
               <Button variant="ghost" className="rounded-full px-5 py-2 text-base font-medium group-hover:bg-green-50 group-hover:text-green-700 transition">Shopify</Button>
-            </Link>
-            <Link href="/products/bigcommerce" className="group" prefetch={false} aria-label="Browse BigCommerce Products">
-              <Button variant="ghost" className="rounded-full px-5 py-2 text-base font-medium group-hover:bg-yellow-50 group-hover:text-yellow-700 transition">BigCommerce</Button>
             </Link>
           </div>
         </div>
