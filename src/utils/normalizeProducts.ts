@@ -32,72 +32,37 @@ export type UnifiedProduct = {
   source?: string;
 };
 
-export function normalizeProducts(data: unknown): unknown {
-  function normalize(p: Product): UnifiedProduct {
-    // Identify source
-    let source: string = 'unknown';
-    if (p.priceRange || p.title || (p.images && Array.isArray(p.images.edges))) {
-      source = 'shopify';
-    } else if (p.name && p.sku) {
-      source = 'salesforce';
-    }
+export function normalizeProducts(data: Product[] | { products: Product[] }) {
+  let products = data.products || data;
 
-    // Unify price fields
-    let price: number | undefined = undefined;
-    let originalPrice: number | undefined = undefined;
-    if (source === 'shopify') {
-      price = Number(p.priceRange?.minVariantPrice?.amount ?? p.priceRange?.maxVariantPrice?.amount ?? p.price ?? 0) || undefined;
-      // If you have compareAtPrice, set originalPrice; else use price
-      originalPrice = price;
-    } else {
-      price = typeof p.price === 'string' ? Number(p.price) : p.price;
-      originalPrice = typeof p.originalPrice === 'string' ? Number(p.originalPrice) : p.originalPrice;
-    }
+  // Flatten nested product objects (e.g., { data: { product: {...} } })
+  products = products.map((entry: Product | { data?: { product?: Product } }) =>
+    (entry as { data?: { product?: Product } }).data && (entry as { data: { product: Product } }).data.product
+      ? (entry as { data: { product: Product } }).data.product
+      : entry
+  );
 
-    // Unify image
+  products = products.map((product: Product) => {
+    let id = product.id;
+    // Shopify: convert gid://shopify/Product/20 to "20"
+    if (typeof id === 'string') {
+      const match = id.match(/Product\/(\d+)/);
+      if (match) id = match[1];
+    }
+    // Normalize image property for all sources
     const image =
-      (p.images && Array.isArray(p.images.edges) && p.images.edges.length > 0 && p.images.edges[0]?.node?.url)
-        ? p.images.edges[0].node.url
-      : (p.imageGroups && Array.isArray(p.imageGroups) && p.imageGroups.length > 0 && p.imageGroups[0].images && Array.isArray(p.imageGroups[0].images) && p.imageGroups[0].images.length > 0 && p.imageGroups[0].images[0]?.link)
-        ? p.imageGroups[0].images[0].link
-      : typeof p.image === 'string' ? p.image : undefined;
-
-    // Unify alt
-    const alt =
-      (p.images && Array.isArray(p.images.edges) && p.images.edges.length > 0 && p.images.edges[0]?.node?.altText)
-        ? p.images.edges[0].node.altText
-      : p.name || p.title || 'Product image';
-
-    // Normalize Shopify GID format (gid://shopify/Product/20) to just the numeric ID
-    let normalizedId = String(p.id ?? '');
-    if (source === 'shopify' && normalizedId.startsWith('gid://')) {
-      const match = normalizedId.match(/\/(\d+)$/);
-      if (match) {
-        normalizedId = match[1];
-      }
-    }
+      product.images?.edges?.[0]?.node?.url ||
+      product.imageGroups?.[0]?.images?.[0]?.link ||
+      product.image ||
+      product.imageUrl ||
+      null;
 
     return {
-      id: normalizedId,
-      sku: p.sku ?? (source === 'shopify' ? p.handle : undefined),
-      name: p.name ?? p.title ?? '',
-      price,
-      originalPrice,
+      ...product,
+      id,
       image,
-      description: typeof p.description === 'string' ? p.description : undefined,
-      alt,
-      source,
     };
-  }
-  if (
-    typeof data === 'object' &&
-    data !== null &&
-    'products' in data &&
-    Array.isArray((data as { products: unknown }).products)
-  ) {
-    return { ...data, products: ((data as { products: unknown }).products as Product[]).map(normalize) };
-  } else if (Array.isArray(data)) {
-    return (data as Product[]).map(normalize);
-  }
-  return data;
+  });
+
+  return { products };
 }

@@ -4,12 +4,25 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   // Next.js 15: searchParams may be a promise, must await
   const params = typeof searchParams.then === 'function' ? await searchParams : searchParams;
   const source = (params as { source?: string }).source || undefined;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
   let data = [];
   let title = 'All Products';
   try {
-    const res = await fetch(`/api/products${source ? `?source=${source}` : ''}`, { cache: 'no-store' });
-    data = await res.json();
-    if (!Array.isArray(data)) data = [];
+    const url = source ? `${apiUrl}/api/${source}` : `${apiUrl}/api/products`;
+    const res = await fetch(url, { 
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      console.error(`Failed to fetch products${source ? ` from ${source}` : ''}`, res.status);
+      data = [];
+    } else {
+      const responseData = await res.json();
+      data = Array.isArray(responseData.products) ? responseData.products : [];
+    }
   } catch (error) {
     console.error('Error fetching products:', error);
     data = [];

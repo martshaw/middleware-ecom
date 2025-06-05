@@ -41,7 +41,7 @@ export default function ProductDetail({ product, source }: { product: Product | 
       <div className="flex flex-col items-center">
         <div className="aspect-4/3 w-full bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center mb-4 relative">
           {product.image ? (
-            <Image width="400" height="400" src={product.image} alt={product.name} className="object-cover w-full h-full" />
+            <Image width="400" height="400" src={product.image} alt={product.name || "Product image"} className="object-cover w-full h-full" />
           ) : (
             <span className="text-gray-400">No Image</span>
           )}

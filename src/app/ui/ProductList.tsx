@@ -26,12 +26,16 @@ const ProductCard = memo(({ product, source }: { product: ProductListProps['data
         {product.image ? (
           <Image
             src={product.image}
-            alt={product.alt || product.name}
+            alt={product.alt || product.name || 'Product Image'}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
-            priority={false}
-            loading="lazy"
+            priority={true}
+            loading="eager"
+            unoptimized={true} // Use this if you want to avoid Next.js image optimization
+            quality={75} // Adjust quality as needed
+            placeholder="blur"
+            blurDataURL={product.image} // Use the same image as a placeholder
           />
         ) : (
           <div className="w-full h-full bg-gray-100 flex items-center justify-center">
