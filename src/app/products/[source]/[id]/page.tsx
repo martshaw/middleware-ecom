@@ -1,17 +1,24 @@
 import { notFound } from 'next/navigation';
 import ProductDetail from '../../../ui/ProductDetail';
 
-interface Params {
+
+interface ProductPageParams {
   source: string;
   id: string;
 }
 
-export default async function ProductDetailPage({ params }: { params: Params | Promise<Params> }) {
-  const awaitedParams = await params;
-  const { source, id } = awaitedParams;
-  console.log('page loaded')
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: Promise<ProductPageParams>;
+}) {
+  const { source, id } = await params;
+  
   try {
-    const res = await fetch(`http://localhost:3000/api/${source}`, { cache: 'no-store' });
+    const res = await fetch(`http://localhost:3000/api/${source}`, { 
+      cache: 'no-store',
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     if (!res.ok) {
       console.error(`Failed to fetch data from source: ${source}`);
       notFound();

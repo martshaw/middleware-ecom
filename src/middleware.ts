@@ -32,6 +32,7 @@ export async function middleware(request: NextRequest) {
     }
 
     // Normalize image and alt fields for all products in the response
+    console.log('data before normalization:', data);
     data = normalizeProducts(data);
 
     // Create a new JSON response with the normalized data
