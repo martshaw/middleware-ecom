@@ -10,33 +10,33 @@ interface ProductPageParams {
 export default async function ProductDetailPage({
   params,
 }: {
-  params: ProductPageParams;
+  params: Promise<ProductPageParams>;
 }) {
-  const { source, id } = params;
+  const { source, id } = await params;
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+  
   try {
-    const res = await fetch(`${apiUrl}/api/${source}`, {
+    // This will be handled by our middleware
+    const res = await fetch(`${apiUrl}/api/${source}/${id}`, { 
       cache: 'no-store',
-      next: { revalidate: 3600 }
     });
+
     if (!res.ok) {
+      console.error(`Failed to fetch product ${id} from ${source}: ${res.statusText}`);
       notFound();
     }
 
     const data = await res.json();
-    const products = data.products || [];
-
-    // Products are already normalized by middleware!
-    const product =
-      products.find((p: { id: string }) => p.id === id) ||
-      products.find((p: { sku?: string }) => p.sku === id);
+    const product = data.product;
 
     if (!product) {
+      console.error(`Product with ID ${id} not found in source: ${source}`);
       notFound();
     }
 
     return <ProductDetail product={product} source={source} />;
-  } catch {
+  } catch (error) {
+    console.error('Error fetching product details:', error);
     notFound();
   }
 }

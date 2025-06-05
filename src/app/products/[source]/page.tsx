@@ -17,7 +17,6 @@ export default async function ProductsBySourcePage(
   try {
     const res = await fetch(endpoint, { 
       cache: 'no-store',
-      next: { revalidate: 3600 }, // Cache for 1 hour
       headers: {
         'Content-Type': 'application/json',
       },

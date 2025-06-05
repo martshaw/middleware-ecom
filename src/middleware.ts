@@ -2,10 +2,31 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { normalizeProducts } from './utils/normalizeProducts';
 import { handleRewrite } from './utils/rewriteHandlers';
+import { lookupProduct } from './utils/productLookup';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Handle product detail API requests
+  const productDetailMatch = pathname.match(/^\/api\/(shopify|salesforce)\/([^/]+)$/);
+  if (productDetailMatch && !request.headers.get('x-middleware-processed')) {
+    const [, source, id] = productDetailMatch;
+    
+    const { product, status, error } = await lookupProduct(source, id, request);
+    
+    if (!product) {
+      return NextResponse.json(
+        { error: error || 'Product not found' },
+        { status }
+      );
+    }
+    
+    const response = NextResponse.json({ product });
+    response.headers.set('x-middleware-processed', '1');
+    return response;
+  }
+
+  // Handle product listing API requests
   if (
     (pathname.startsWith('/api/products') ||
       pathname.startsWith('/api/shopify') ||
@@ -24,9 +45,8 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // Normalize all product data here!
+    // Normalize product data
     const normalizedData = normalizeProducts(data);
-
     const res = NextResponse.json(normalizedData);
     res.headers.set('x-middleware-processed', '1');
     return res;
