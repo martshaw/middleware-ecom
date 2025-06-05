@@ -9,11 +9,22 @@ interface ProductListProps {
   source: string;
 }
 
+/**
+ * ProductList Component
+ * 
+ * A client-side component that fetches and displays a grid of products.
+ * Implements loading states, error handling, and optimized rendering.
+ */
 export function ProductList({ source }: ProductListProps) {
+  // State management for products, loading, and error states
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  /**
+   * Fetches products from the API with timeout and error handling
+   * Uses AbortController for request cancellation and cleanup
+   */
   const fetchProducts = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -22,6 +33,7 @@ export function ProductList({ source }: ProductListProps) {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
       const endpoint = source ? `${apiUrl}/api/${source}` : `${apiUrl}/api/products`;
       
+      // Set up request timeout and abort controller
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
       
@@ -41,6 +53,7 @@ export function ProductList({ source }: ProductListProps) {
       const data = await res.json();
       setProducts(data.products || []);
     } catch (err) {
+      // Handle different types of errors
       if (err instanceof Error) {
         if (err.name === 'AbortError') {
           setError('Request timed out. Please try again.');
@@ -55,16 +68,21 @@ export function ProductList({ source }: ProductListProps) {
     }
   }, [source]);
 
+  // Fetch products on mount and cleanup on unmount
   useEffect(() => {
     fetchProducts();
     
-    // Cleanup function
+    // Cleanup function to prevent memory leaks
     return () => {
       setProducts([]);
       setError(null);
     };
   }, [fetchProducts]);
 
+  /**
+   * Handles add to cart button click
+   * Prevents event propagation to avoid navigation
+   */
   const handleAddToCart = useCallback((e: React.MouseEvent, productId: string) => {
     e.preventDefault();
     e.stopPropagation();
@@ -72,6 +90,10 @@ export function ProductList({ source }: ProductListProps) {
     console.log('Adding to cart:', productId);
   }, []);
 
+  /**
+   * Memoized product grid to prevent unnecessary re-renders
+   * Uses useMemo for performance optimization
+   */
   const productGrid = useMemo(() => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {products.map((product) => (
@@ -117,6 +139,7 @@ export function ProductList({ source }: ProductListProps) {
     </div>
   ), [products, source, handleAddToCart]);
 
+  // Loading state with skeleton UI
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -134,6 +157,7 @@ export function ProductList({ source }: ProductListProps) {
     );
   }
 
+  // Error state with retry option
   if (error) {
     return (
       <div className="text-center py-12">
@@ -153,6 +177,7 @@ export function ProductList({ source }: ProductListProps) {
     );
   }
 
+  // Empty state
   if (products.length === 0) {
     return (
       <div className="text-center py-12">

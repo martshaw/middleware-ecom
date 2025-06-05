@@ -6,9 +6,14 @@ interface PageProps {
   params: Promise<{ source: string; id: string }>;
 }
 
-// Revalidate this page every 60 seconds
+// Revalidate this page every 60 seconds for Incremental Static Regeneration (ISR)
 export const revalidate = 60;
 
+/**
+ * Generates dynamic metadata for the product detail page
+ * Fetches product data to create SEO-friendly metadata
+ * Includes OpenGraph tags for social sharing
+ */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const { source, id } = resolvedParams;
@@ -36,6 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       };
     }
 
+    // Generate SEO-friendly metadata with product details
     return {
       title: `${product.name} | ${source.charAt(0).toUpperCase() + source.slice(1)}`,
       description: product.description || `View details for ${product.name} from ${source}.`,
@@ -47,6 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       },
     };
   } catch {
+    // Fallback metadata if product fetch fails
     return {
       title: 'Product Details',
       description: 'View product details from our store.',
@@ -54,11 +61,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
+/**
+ * Product Detail Page Component
+ * 
+ * Server-side rendered page that displays detailed product information
+ * Implements ISR for dynamic content updates
+ * Handles loading states and errors appropriately
+ */
 export default async function ProductPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { source, id } = resolvedParams;
 
   try {
+    // Fetch product data with ISR
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
     const res = await fetch(`${apiUrl}/api/${source}/${id}`, {
       next: { revalidate: 60 },
@@ -78,6 +93,7 @@ export default async function ProductPage({ params }: PageProps) {
       notFound();
     }
 
+    // Render product details with responsive layout
     return (
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -91,7 +107,7 @@ export default async function ProductPage({ params }: PageProps) {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover rounded-lg"
-                  priority
+                  priority // Load main product image with priority
                 />
               </div>
             )}

@@ -12,6 +12,8 @@ describe('middleware', () => {
   let nextResponseJsonSpy: jest.SpyInstance;
   let consoleErrorSpy: jest.SpyInstance;
 
+  // Use the environment variable for the API URL, fallback to localhost if not set
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -54,9 +56,9 @@ describe('middleware', () => {
     global.fetch = jest.fn().mockResolvedValue({ json: mockJson }) as unknown as jest.MockedFunction<typeof fetch>;
     (normalizeModule.normalizeProducts as jest.Mock).mockImplementation(() => ({ products: [{ name: 'Normalized' }] }));
 
-    request = mockRequest('http://localhost/api/products');
+    request = mockRequest(`${API_URL}/api/products`);
     const res = await middleware(request);
-    expect(global.fetch).toHaveBeenCalledWith('http://localhost/api/products', { headers: { 'x-middleware-processed': '1' } });
+    expect(global.fetch).toHaveBeenCalledWith(`${API_URL}/api/products`, { headers: { 'x-middleware-processed': '1' } });
     expect(normalizeModule.normalizeProducts).toHaveBeenCalledWith({ products: [{ name: 'Test' }] });
     expect(nextResponseJsonSpy).toHaveBeenCalledWith({ products: [{ name: 'Normalized' }] });
     expect(res.headers.set).toHaveBeenCalledWith('x-middleware-processed', '1');
@@ -73,7 +75,7 @@ describe('middleware', () => {
     global.fetch = jest.fn().mockResolvedValue({ json: mockJson }) as unknown as jest.MockedFunction<typeof fetch>;
     (normalizeModule.normalizeProducts as jest.Mock).mockImplementation(() => [{ name: 'Normalized' }]);
 
-    request = mockRequest('http://localhost/api/shopify');
+    request = mockRequest(`${API_URL}/api/shopify`);
     const res = await middleware(request);
     expect(normalizeModule.normalizeProducts).toHaveBeenCalledWith([{ name: 'Test' }]);
     expect(nextResponseJsonSpy).toHaveBeenCalledWith([{ name: 'Normalized' }]);

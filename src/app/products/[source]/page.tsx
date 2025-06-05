@@ -5,7 +5,10 @@ import { ProductListError } from '../../../components/ProductListError';
 import { ErrorBoundary } from '../../../components/ErrorBoundary';
 import { Metadata } from 'next';
 
-// Generate static params at build time
+/**
+ * Generate static paths for known product sources
+ * This enables static generation of these pages at build time
+ */
 export async function generateStaticParams() {
   return [
     { source: 'shopify' },
@@ -13,13 +16,17 @@ export async function generateStaticParams() {
   ];
 }
 
-// Revalidate this page every 60 seconds
+// Enable Incremental Static Regeneration (ISR) with 60-second revalidation
 export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ source: string }>;
 }
 
+/**
+ * Generates dynamic metadata for the product listing page
+ * Creates SEO-friendly titles and descriptions based on the source
+ */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const source = resolvedParams.source;
@@ -36,6 +43,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+/**
+ * Product Listing Page Component
+ * 
+ * Server-side rendered page that displays a list of products
+ * Uses Suspense for loading states and ErrorBoundary for error handling
+ * Implements ISR for dynamic content updates
+ */
 export default async function ProductsPage({ params }: PageProps) {
   const resolvedParams = await params;
   const source = resolvedParams.source;
@@ -46,7 +60,9 @@ export default async function ProductsPage({ params }: PageProps) {
         {source} Products
       </h1>
       
+      {/* Error boundary to catch and handle any rendering errors */}
       <ErrorBoundary fallback={<ProductListError />}>
+        {/* Suspense boundary for loading states */}
         <Suspense fallback={<ProductListSkeleton />}>
           <ProductList source={source} />
         </Suspense>
