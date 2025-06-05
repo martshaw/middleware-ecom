@@ -108,6 +108,10 @@ export default async function ProductPage({ params }: PageProps) {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover rounded-lg"
                   priority // Load main product image with priority
+                  loading="eager"
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL={product.image}
                 />
               </div>
             )}

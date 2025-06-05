@@ -113,6 +113,8 @@ export function ProductList({ source }: ProductListProps) {
                 className="object-cover rounded-md"
                 loading="lazy"
                 quality={75}
+                placeholder="blur"
+                blurDataURL={product.image}
               />
             </div>
           )}
