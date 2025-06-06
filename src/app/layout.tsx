@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </div>
       </nav>
       {children}
-      <Analytics/>
+      <Analytics />
       </body>
       
     </html>
